@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Ticket Booking System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    padding-bottom:30px;
+    background-attachment: fixed;
+}
+    h1,p{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        color:#0e097c;
+        text-shadow: 0px 0px 10px #0098d3;
+    }
+    p{
+        color:white;
+        text-align: center;
+    }
+    .bar{
+        background:transparent;
+        display:flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 15px;
+        padding: 17px;
+        backdrop-filter: blur(5px);
+        z-index:1000;
+        position: sticky;
+        top: 0;
+        box-shadow: 0px 0px 10px #634dff;
+;    }
+    .bar-link{
+      text-decoration: none;
+      color:white;
+      font-weight: bold;
+      transition: 0.3s all;
+    }
+    .bar-link:hover{
+    transform:scale(1.05);
+    text-shadow:0 0 10px #27c4ff;
+}
+
+/* Navbar */
+nav{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:20px;
+    background:rgba(0,0,0,0.2);
+    backdrop-filter:blur(10px);
+    box-shadow:0 2px 15px rgba(0,0,0,0.2);
+}
+
+nav button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,114,255,0.4);
+}
+
+/* Main Container */
+.container{
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
+}
+
+/* Input Box */
+.form-box{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:20px;
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+.form-box input{
+    width:280px;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    font-size:15px;
+    background:rgba(255,255,255,0.9);
+    transition:0.3s;
+}
+
+.form-box input:focus{
+    transform:scale(1.03);
+    box-shadow:0 0 15px rgba(0,114,255,0.4);
+}
+
+/* Output Section */
+#output{
+    margin-top:25px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    min-height:220px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+#output h2{
+    color:#0072ff;
+    margin-bottom:15px;
+}
+
+#output p{
+    margin:10px 0;
+    font-size:16px;
+    color:#333;
+}
+
+/* Booking Cards */
+.booking-card{
+    background:linear-gradient(135deg,#f8f9fa,#ffffff);
+    border-left:6px solid #0072ff;
+    padding:18px;
+    margin-top:15px;
+    border-radius:15px;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.booking-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.booking-card h3{
+    color:#0072ff;
+    margin-bottom:10px;
+}
+
+.booking-card p{
+    margin:6px 0;
+    color:#444;
+}
+
+/* Responsive */
+@media(max-width:600px){
+
+    nav{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    nav button{
+        width:90%;
+    }
+
+    .form-box input{
+        width:100%;
+    }
+}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="#home" class = "bar-link">Home</a>
+  <a href="#about" class = "bar-link">About</a>
+  <a href="#contact" class = "bar-link">Contact</a>
+</div>
+    <h1>Blue Diamond</h1>
+    <p>First priority of every person. Our mission to provide not only service our main mission to provode life-style</p>
+<nav>
+    <button id="bookBtn">Book Ticket</button>
+    <button id="viewBtn">View Bookings</button>
+    <button id="exitBtn">Exit</button>
+</nav>
+
+<div class="container">
+
+    <div class="form-box">
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter Your Name"
+        >
+
+        <input
+            type="text"
+            id="destination"
+            placeholder="Enter Destination"
+        >
+    </div>
+
+    <div id="output">
+        <h2>Air Ticket Booking System</h2>
+        <p>Enter details and click Book Ticket.</p>
+    </div>
+
+</div>
+
+<script>
+
+let available = [];
+let seats = 300;
+
+const output = document.getElementById("output");
+const nameInput = document.getElementById("name");
+const destinationInput = document.getElementById("destination");
+
+document.getElementById("bookBtn").addEventListener("click", () => {
+
+    const N = nameInput.value.trim();
+    const D = destinationInput.value.trim();
+
+    if(N === "" || D === ""){
+        output.innerHTML =
+        "<h2>Please fill all fields.</h2>";
+        return;
+    }
+
+    if(available.length >= seats){
+        output.innerHTML =
+        "<h2>No Seats Available</h2>";
+        return;
+    }
+
+    let TicketID =
+    "AIR" + Math.floor(Math.random() * 1000);
+
+    available.push({
+        name: N,
+        destination: D,
+        ticketId: TicketID
+    });
+
+    output.innerHTML = `
+        <h2>Ticket Booked Successfully</h2>
+
+        <p><strong>Name:</strong> ${N}</p>
+
+        <p><strong>Destination:</strong> ${D}</p>
+
+        <p><strong>Seat Name:</strong>
+        A${available.length}</p>
+
+        <p><strong>Remaining Seats:</strong>
+        ${seats - available.length}</p>
+
+        <p><strong>Ticket ID:</strong>
+        ${TicketID}</p>
+    `;
+
+    nameInput.value = "";
+    destinationInput.value = "";
+});
+
+document.getElementById("viewBtn").addEventListener("click", () => {
+
+    if(available.length === 0){
+        output.innerHTML =
+        "<h2>No Bookings Found</h2>";
+        return;
+    }
+
+    let html = "<h2>Past Bookings</h2>";
+
+    for(let j = 0; j < available.length; j++){
+
+        html += `
+        <div class="booking-card">
+
+            <h3>Booking ${j + 1}</h3>
+
+            <p>
+                <strong>Name:</strong>
+                ${available[j].name}
+            </p>
+
+            <p>
+                <strong>Destination:</strong>
+                ${available[j].destination}
+            </p>
+
+            <p>
+                <strong>Ticket ID:</strong>
+                ${available[j].ticketId}
+            </p>
+
+            <p>
+                <strong>Seat Name:</strong>
+                A${j + 1}
+            </p>
+
+        </div>
+        `;
+    }
+
+    output.innerHTML = html;
+});
+
+document.getElementById("exitBtn").addEventListener("click", () => {
+
+    output.innerHTML =
+    "<h2>You Exit</h2>";
+
+    setTimeout(() => {
+        output.innerHTML +=
+        "<p>Thanks For Visiting</p>";
+    }, 1000);
+});
+
+</script>
+
+</body>
+</html>
