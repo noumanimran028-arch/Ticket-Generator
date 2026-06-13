@@ -4,185 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Air Ticket Booking System</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#1e3c72,#2a5298);
-    padding-bottom:30px;
-    background-attachment: fixed;
-}
-    h1,p{
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        color:#0e097c;
-        text-shadow: 0px 0px 10px #0098d3;
-    }
-    p{
-        color:white;
-        text-align: center;
-    }
-    .bar{
-        background:transparent;
-        display:flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 15px;
-        padding: 17px;
-        backdrop-filter: blur(5px);
-        z-index:1000;
-        position: sticky;
-        top: 0;
-        box-shadow: 0px 0px 10px #634dff;
-;    }
-    .bar-link{
-      text-decoration: none;
-      color:white;
-      font-weight: bold;
-      transition: 0.3s all;
-    }
-    .bar-link:hover{
-    transform:scale(1.05);
-    text-shadow:0 0 10px #27c4ff;
-}
-
-/* Navbar */
-nav{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    padding:20px;
-    background:rgba(0,0,0,0.2);
-    backdrop-filter:blur(10px);
-    box-shadow:0 2px 15px rgba(0,0,0,0.2);
-}
-
-nav button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-    color:white;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-nav button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,114,255,0.4);
-}
-
-/* Main Container */
-.container{
-    width:90%;
-    max-width:900px;
-    margin:30px auto;
-}
-
-/* Input Box */
-.form-box{
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(15px);
-    padding:25px;
-    border-radius:20px;
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    flex-wrap:wrap;
-    box-shadow:0 8px 30px rgba(0,0,0,0.2);
-}
-
-.form-box input{
-    width:280px;
-    padding:14px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    font-size:15px;
-    background:rgba(255,255,255,0.9);
-    transition:0.3s;
-}
-
-.form-box input:focus{
-    transform:scale(1.03);
-    box-shadow:0 0 15px rgba(0,114,255,0.4);
-}
-
-/* Output Section */
-#output{
-    margin-top:25px;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    min-height:220px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
-}
-
-#output h2{
-    color:#0072ff;
-    margin-bottom:15px;
-}
-
-#output p{
-    margin:10px 0;
-    font-size:16px;
-    color:#333;
-}
-
-/* Booking Cards */
-.booking-card{
-    background:linear-gradient(135deg,#f8f9fa,#ffffff);
-    border-left:6px solid #0072ff;
-    padding:18px;
-    margin-top:15px;
-    border-radius:15px;
-    transition:0.3s;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
-
-.booking-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-.booking-card h3{
-    color:#0072ff;
-    margin-bottom:10px;
-}
-
-.booking-card p{
-    margin:6px 0;
-    color:#444;
-}
-
-/* Responsive */
-@media(max-width:600px){
-
-    nav{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    nav button{
-        width:90%;
-    }
-
-    .form-box input{
-        width:100%;
-    }
-}
-</style>
+<link rel="stylesheet" href="T.css">
 </head>
 <body>
 <div class="bar">
@@ -222,8 +44,7 @@ nav button:hover{
 </div>
 
 <script>
-
-let available = [];
+    let available = [];
 let seats = 300;
 
 const output = document.getElementById("output");
@@ -332,6 +153,7 @@ document.getElementById("exitBtn").addEventListener("click", () => {
     }, 1000);
 });
 
+    
 </script>
 
 </body>
